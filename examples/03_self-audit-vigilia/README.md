@@ -6,17 +6,21 @@ audits for €499, run by the same person who wrote this repository.
 
 So it gets audited by its own auditor, in public, and it did not come out clean.
 
-**Run twice.** The first run, 2026-09-03, returned one MAJOR and one MINOR. The
-operator shipped a fix and the audit was re-run on 2026-09-06. The MAJOR is now a
-PASS. Both states are kept — the superseded capture is preserved in the evidence
-pack, and the finding carries its own history — because a remediation you cannot
-check against what it replaced is a claim, not a record.
+**Run three times.** The first run, 2026-09-03, returned one MAJOR and one MINOR.
+The operator shipped a fix and the audit was re-run on 2026-09-06: the MAJOR became
+a PASS. The operator shipped a second fix and the audit was re-run on 2026-09-09:
+the MINOR became a PASS — and the fix activated an obligation that had been
+NOT_APPLICABLE while there was nothing to grade, which now scores a smaller MINOR
+of its own. Every state is kept — the superseded captures are preserved in the
+evidence pack, and each finding carries its own history — because a remediation
+you cannot check against what it replaced is a claim, not a record.
 
-| | First run, 2026-09-03 | Re-run, 2026-09-06 |
-|---|---|---|
-| **F-08** · disclosure at the point of interaction on the free checker | PARTIAL · **MAJOR** | **PASS** — disclosure now sits above the submit control and repeats on the snapshot, in five languages |
-| **F-02** · machine-readable marking of synthetic content | FAIL · **MINOR** | **FAIL · MINOR, still open** — inside the Article 111(4) window until 2 December 2026 |
-| PASS | three | four |
+| | First run, 2026-09-03 | Re-run, 2026-09-06 | Re-run, 2026-09-09 |
+|---|---|---|---|
+| **F-08** · disclosure at the point of interaction on the free checker | PARTIAL · **MAJOR** | **PASS** — disclosure now sits above the submit control and repeats on the snapshot, in five languages | PASS |
+| **F-02** · machine-readable marking of synthetic content | FAIL · **MINOR** | FAIL · MINOR, still open — inside the Article 111(4) window until 2 December 2026 | **PASS** — IPTC `digitalSourceType` on the dispatches and the feed, a provenance header and block on the checker |
+| **F-03** · quality of the marking technique | NOT_APPLICABLE — nothing to grade | NOT_APPLICABLE | **PARTIAL · MINOR** — interoperable and consistent, and metadata beside plain text does not survive the text being copied; the limit of what is feasible for text |
+| PASS | three | four | five |
 
 There is an obvious reason not to publish this: it is a list of ways a commercial
 product falls short, written by its own operator, on the internet, permanently.
@@ -26,8 +30,8 @@ companies that behave exactly as the auditor expects has demonstrated nothing.
 The interesting question about any audit tool is what it says when the answer is
 inconvenient — and then whether anything changes because it said it.
 
-Evidence was captured from the live site on 2026-09-06, with the 2026-09-03
-capture preserved beneath it, and is reproduced in `evidence-pack/` so the
+Evidence was captured from the live site on 2026-09-03, 2026-09-06 and 2026-09-09,
+each capture preserved beside the next, and is reproduced in `evidence-pack/` so the
 findings can be checked without trusting this summary.
 The audit covers **public surfaces only** — the authenticated €499 workspace was
 not examined, and the report says so.

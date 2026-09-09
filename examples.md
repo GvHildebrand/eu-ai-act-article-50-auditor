@@ -164,9 +164,15 @@ run; it is now a PASS, and the superseded evidence is kept in the pack:
 > finding: The disclosure is delivered at first exposure on the dispatch pages but not on the free compliance checker, where the only AI disclosure is a site footer encountered after the interaction.
 > ```
 
-**MINOR, still open** — no machine-readable mark on any output, inside the
-Article 111(4) window until 2 December 2026. Vigilia's structured data names an `Organization` as
-author, which tells a machine *who published*, not *that the text is synthetic*.
+**MINOR, found 2026-09-03 and remediated 2026-09-08** — no machine-readable mark on
+any output. At the first two runs Vigilia's structured data named an `Organization`
+as author, which tells a machine *who published*, not *that the text is synthetic*.
+Verified live on 2026-09-09: IPTC `digitalSourceType` on the dispatches and the
+feed, a provenance header and block on the checker. Now PASS — and the fix
+activated the second sentence of 50(2), which grades the technique: a mark that is
+metadata beside plain text does not survive the text being copied, so F-03 now
+scores a smaller MINOR, the limit of what is feasible for text rather than a
+shortfall against it.
 
 The instructive part is that Vigilia's human-facing disclosure is genuinely
 excellent — byline above the headline, colophon, footer, `llms.txt`, a public

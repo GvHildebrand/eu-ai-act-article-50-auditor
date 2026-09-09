@@ -2,13 +2,13 @@
 
 ```audit
 artifact: Vigilia — https://aivigilia.com — public surfaces
-artifact_version: evidence captured 2026-09-06 (re-run; first run 2026-09-03)
-audited_on: 2026-09-06
+artifact_version: evidence captured 2026-09-09 (third run; first run 2026-09-03, second 2026-09-06)
+audited_on: 2026-09-09
 auditor: VIGILIA-EU-act-auditor
 register_version: 1.0.0
 reference_fingerprint: 3fa2319d6595d47a
 scope: Article 50 of Regulation (EU) 2024/1689 as amended by Regulation (EU) 2026/1744. Public surfaces only; the authenticated workspace was not examined.
-trust: observed=5 inferred=4 declared=0 none=2
+trust: observed=6 inferred=3 declared=0 none=2
 ```
 
 > **Not a fixture, and not independent.** Vigilia is a live service that sells EU
@@ -26,7 +26,8 @@ Two AI systems Vigilia puts into service on its public site:
 2. **the free compliance checker** — a tool at `/about` that takes a visitor's
    description of their own AI system and returns a generated risk classification.
 
-Evidence was captured from the live site on 2026-09-06: the dispatch page as a
+Evidence was captured from the live site on 2026-09-06 and, for the marking, on
+2026-09-09: the dispatch page as a
 reader meets it, the checker surface with every string shown at it, the complete
 machine-readable metadata of a published dispatch, the checker's response
 construction, the homepage disclosure section and compliance table, `llms.txt`,
@@ -46,7 +47,7 @@ authenticated €499 workspace, and any content generated inside it, were not.
 | Emotion recognition / biometric categorisation? | Neither | `system-facts.md:L16-L17` |
 | Text published to inform the public on matters of public interest? | **Yes** — dispatches on AI regulation and safety | `system-facts.md:L19` |
 | Law-enforcement authorisation claimed? | No | `system-facts.md:L21` |
-| Marking technique for synthetic text | **None found** | `system-facts.md:L23` |
+| Marking technique for synthetic text | **Found at the third run** — IPTC `digitalSourceType` in the dispatch JSON-LD and RSS feed, a provenance header and block on the checker response; none on 2026-09-03 and 2026-09-06 | `system-facts.md:L23` |
 
 Being **both** provider and deployer is what makes this artifact useful as an
 example: unlike the two fixtures, Vigilia is exposed to 50(2) *and* to 50(4), and
@@ -61,10 +62,10 @@ operator's own published compliance table independently reaches.
 
 | Verdict | Count |
 |---|---|
-| PASS | 4 |
-| FAIL | 1 |
-| PARTIAL | 0 |
-| NOT_APPLICABLE | 4 |
+| PASS | 5 |
+| FAIL | 0 |
+| PARTIAL | 1 |
+| NOT_APPLICABLE | 3 |
 | INSUFFICIENT_EVIDENCE | 0 |
 | NOTED | 2 |
 
@@ -81,8 +82,8 @@ operator's own published compliance table independently reaches.
 
 | Evidence | Verdicts | Meaning |
 |---|---|---|
-| `observed` | 5 | the auditor saw the artifact itself — a rendered surface, a real output file, a response header |
-| `inferred` | 4 | derived from something *about* the artifact — source code, an archive snapshot, a public record |
+| `observed` | 6 | the auditor saw the artifact itself — a rendered surface, a real output file, a response header |
+| `inferred` | 3 | derived from something *about* the artifact — source code, an archive snapshot, a public record |
 | `declared` | 0 | the operator said so, and nothing independent confirms it |
 | `none` | 2 | the provision imposes no duty, so there is nothing to evidence |
 
@@ -91,29 +92,37 @@ carries its own `provenance`, so you can see which ones. `tools/verify_citations
 recomputes these totals from the findings and fails the report if the header
 misstates them — an audit may not understate how much it is trusting.
 
-**This is a re-run.** The first run of this audit, on 2026-09-03, returned one
-MAJOR and one MINOR. The MAJOR has been remediated and is now a PASS. The record
-of what it said is kept rather than overwritten: the superseded capture is
-preserved in the evidence pack, and F-08 below carries both states.
+**This is the third run.** The first, on 2026-09-03, returned one MAJOR and one
+MINOR. The MAJOR was remediated and became a PASS on 2026-09-06. The MINOR was
+remediated and became a PASS on 2026-09-09 — and that remediation activated an
+obligation which had been NOT_APPLICABLE while there was nothing to grade, and
+which now scores a smaller MINOR of its own. The record of what each run said is
+kept rather than overwritten: the superseded captures are preserved in the
+evidence pack, and F-02, F-03 and F-08 below carry their history.
 
 | | |
 |---|---|
 | **MAJOR** | ~~F-08 · the free compliance checker generates AI prose with no disclosure at the point of interaction.~~ **Remediated 2026-09-06.** The disclosure now sits above the submit control and is repeated on the returned snapshot, in five languages. Now PASS. |
-| **MINOR** | F-02 · no machine-readable mark of synthetic content on any output. Inside the Article 111(4) window until **2 December 2026**, after which the same evidence returns CRITICAL. **Open.** |
+| **MINOR** | ~~F-02 · no machine-readable mark of synthetic content on any output.~~ **Remediated 2026-09-08, verified live 2026-09-09.** IPTC `digitalSourceType` in the dispatch structured data and feed; a provenance header and block on the checker response. Now PASS. |
+| **MINOR** | F-03 · the marking technique is metadata beside the text — interoperable and consistently applied, and not robust to the prose being copied out, which is the limit of what is technically feasible for plain text. Assessable for the first time now that a technique exists. **Open, and expected to stay open until the state of the art for text moves.** |
 
-Four PASS, four NOT_APPLICABLE, two OBSERVATION, one FAIL. The strong
-human-facing disclosure that earns the passes on 50(1), 50(4) and now 50(5) does
-nothing for 50(2), which is a duty owed to machines — and that gap is the single
-most instructive thing left in this report.
+Five PASS, one PARTIAL, three NOT_APPLICABLE, two OBSERVATION, no FAIL. The strong
+human-facing disclosure that earns the passes on 50(1), 50(4) and 50(5) did nothing
+for 50(2), which is a duty owed to machines. That gap is now closed, and what the
+closing exposed — that a mark on plain text cannot yet follow the text when it is
+copied — is the most instructive thing left in this report.
 
-**Fix next:** marking, before 2 December 2026 (F-02). It is now the only
-outstanding defect, and the window closes.
+**Fix next:** nothing that is technically feasible today. F-03 stays open by the
+nature of text, not by neglect: re-test the mark on every new text-producing
+surface, and adopt a copy-surviving technique when one is generally acknowledged.
 
 **On the value of a self-audit that changed something.** The first run of this
 report was published with a MAJOR against its own author's commercial product.
-Three days later the defect is fixed and the verdict moved. That sequence — find,
-publish, remediate, re-run, keep the old capture — is the only evidence anyone
-should accept that an audit tool does anything at all.
+Three days later the defect is fixed and the verdict moved. Five days after that
+the second defect is fixed, a second verdict moved, and a third opened — which is
+what a re-run is for. That sequence — find, publish, remediate, re-run, keep the
+old capture — is the only evidence anyone should accept that an audit tool does
+anything at all.
 
 ---
 
@@ -157,84 +166,116 @@ evidence_quote: By Vigilia — an autonomous AI agent, human-supervised. How thi
 finding: Natural persons are informed they are interacting with an AI system, by the dispatch byline and by a site-wide disclosure on every page; no exemption is relied on.
 ```
 
-### F-02 · Article 50(2), first sentence · FAIL · MINOR
+### F-02 · Article 50(2), first sentence · PASS
+
+**Verdict changed at the 2026-09-09 re-run. It was FAIL / MINOR on 2026-09-03 and
+again on 2026-09-06.**
 
 Vigilia is the provider of AI systems generating synthetic **text**: the dispatches
 and the checker's snapshot prose. Article 3(11) makes putting a system into service
 "for own use" enough to be a provider, so running the publishing agent for its own
-site does not take Vigilia outside 50(2).
+site does not take Vigilia outside 50(2). Neither exemption applies
+(**EUAIA-50-2-X1**, **EUAIA-50-2-X2**), as before.
 
-Neither exemption applies. The systems compose original prose rather than perform
-an assistive function for standard editing (**EUAIA-50-2-X1**), and no
-law-enforcement authorisation is claimed (**EUAIA-50-2-X2**).
+**The output is now marked, on every surface examined.** Read from the live site on
+2026-09-09: the dispatch's `BlogPosting` JSON-LD carries `digitalSourceType` with
+both the IPTC `trainedAlgorithmicMedia` URI and the schema.org
+`TrainedAlgorithmicMediaDigitalSource` member; the RSS feed item carries the same
+IPTC value as a `<category>` in the IPTC domain; and the checker's response carries
+an `X-Content-Provenance: synthetic; digitalSourceType="…trainedAlgorithmicMedia"`
+header and a `provenance` block in the body with `syntheticContent: true`, the IPTC
+value, a `generatedBy` line and a link to the disclosure page. The operator dates
+the change to 2026-09-08; the verdict rests on what was read live, not on the
+operator's word.
 
-**The output is not marked.** The dispatch carries `BlogPosting` structured data
-whose `author` is an `Organization` named Vigilia. That is a machine-readable
-statement about *who published* — a machine reading it learns the author is an
-organisation, and learns nothing about whether the text was artificially
-generated. There is no IPTC `digitalSourceType`, no C2PA claim, no synthetic-content
-flag, no watermark. The checker is worse: its handler sets exactly one header, a
-rate-limiting cookie, and no field in the payload marks the generated prose.
+**What the previous runs said, kept rather than deleted.** On 2026-09-03 and again
+on 2026-09-06 no output carried any machine-readable mark: the structured data named
+an Organization as author, which marks *who published* and not that the text was
+generated, and the checker returned bare JSON with a single `Set-Cookie` header.
+That returned FAIL, and inside the Article 111(4) window it scored MINOR, with the
+note that the same evidence would return CRITICAL on 2 December 2026. The superseded
+captures stay in the evidence pack (`outputs/dispatch-structured-data.md`,
+`outputs/checker-response.md`) beside the new ones.
 
-This is the finding that matters most, because it is the one the operator would be
-most tempted to argue away. The disclosure practice here is unusually strong —
-byline, colophon, footer, `llms.txt`, a public compliance table. **None of it is a
-machine-readable mark.** 50(2) is not a disclosure obligation dressed in technical
-language; it is a separate duty owed to machines and downstream detectors, and
-excellent human-facing disclosure does not discharge it.
+The deadline still matters to the record: the artifact was placed before 2 August
+2026, so 50(2) reaches it through Article 111(4) on 2 December 2026, and the mark
+was in place before that date.
 
-**Severity.** Vigilia was on the market before 2 August 2026 — the dispatch archive
-runs back to 21 April 2026 — so Article 111(4), added by Regulation (EU) 2026/1744,
-gives it until **2 December 2026**. The matrix therefore returns MINOR today. The
-operator's own published table already states this deadline and counts down to it,
-which is corroboration rather than mitigation: knowing the date does not mark the
-output. On 2 December 2026 the same evidence returns CRITICAL.
+**What this pass does not say.** The first sentence asks that outputs be marked in
+a machine-readable format and detectable as artificially generated. It does not
+ask whether the mark survives a reader copying the prose out of the page. That is
+the second sentence's question — effective, interoperable, robust and reliable so
+far as technically feasible — and it is scored at F-03, which this remediation has
+activated for the first time.
 
 ```finding
 id: F-02
 provision: EUAIA-50-2-MARK
-verdict: FAIL
-severity: MINOR
+verdict: PASS
+severity: NONE
 duty_force: absolute
 applicability: transitional
 provenance: observed
 cite: reference/32024R1689/article-50.md:L16
 quote: Providers of AI systems, including general-purpose AI systems, generating synthetic audio, image, video or text content, shall ensure that the outputs of the AI system are marked in a machine-readable format and detectable as artificially generated or manipulated.
-evidence: examples/03_self-audit-vigilia/evidence-pack/outputs/dispatch-structured-data.md:L34-L40
-evidence_quote: digitalSourceType (IPTC, e.g. trainedAlgorithmicMedia) — No · C2PA manifest or content credential — No · Any syntheticContent / aiGenerated flag — No
-finding: No output of either text-generating system carries a machine-readable mark identifying it as artificially generated; structured-data authorship marks the publisher, not the synthetic origin of the text, so Article 50(2) is not met and falls due on 2 December 2026.
-remediation: Add IPTC `digitalSourceType: trainedAlgorithmicMedia` to the dispatch structured data and a provenance field or response header to the checker's payload, before 2 December 2026. The Code of Practice on Transparency of AI-Generated Content — assessed adequate by the Commission on 8 July 2026 for exactly this obligation — is the place to take the technique from. Keep the byline and colophon: they discharge 50(4), not 50(2).
+evidence: examples/03_self-audit-vigilia/evidence-pack/outputs/dispatch-structured-data-2026-09-09.md:L87-L87
+evidence_quote: digitalSourceType (IPTC, trainedAlgorithmicMedia) — Yes, in the BlogPosting JSON-LD and as an RSS category · syntheticContent flag — Yes, on the checker response · C2PA — No
+finding: Every output of both text-generating systems examined now carries a machine-readable mark identifying it as artificially generated — IPTC digitalSourceType in the dispatch structured data and feed, a provenance header and block on the checker response — in place before the Article 111(4) deadline of 2 December 2026; the earlier captures that found no mark are kept in the evidence pack.
+remediation: None outstanding. Re-test on any change to the dispatch template, the feed route or the checker handler, since a mark generated by code disappears when the code that generates it is refactored; the operator keeps the identifiers in one file for that reason.
 ```
 
-### F-03 · Article 50(2), second sentence · NOT_APPLICABLE
+### F-03 · Article 50(2), second sentence · PARTIAL · MINOR
 
-This obligation grades a marking solution against effectiveness, interoperability,
-robustness and reliability so far as technically feasible. No marking technique is
-in place, so there is nothing to grade.
+**Verdict changed at the 2026-09-09 re-run. It was NOT_APPLICABLE on 2026-09-03 and
+2026-09-06, because no marking technique existed to assess.**
 
-Kept separate from F-02 on purpose. Folding it in would score one defect twice and
-make the audit look harsher than the standard is. When marking is implemented this
-obligation activates and is assessed against the state of the art — and marking
-plain text robustly is hard enough that the feasibility qualifier will do real
-work then.
+The second sentence grades the technique: effective, interoperable, robust and
+reliable, so far as technically feasible, taking into account the type of content,
+the cost of implementation and the generally acknowledged state of the art. A
+technique now exists, so the obligation is live and the qualifier does the work the
+first run said it would.
 
-The 2 December 2026 date governs the applicability of 50(2) as a whole to this
-artifact and is repeated here for that reason.
+**Interoperable and effective, as far as a mark on text can be.** The vocabulary is
+the IPTC digital-source-type NewsCode — the term the schema.org enumeration mirrors
+and the one the Code of Practice on Transparency of AI-Generated Content points at.
+A reader of JSON-LD, of RSS or of an HTTP response finds it in the place each
+format keeps such statements, without a Vigilia-specific vocabulary; the checker
+adds a plain boolean, `syntheticContent: true`, for a client that has never heard
+of IPTC. Both dispatch surfaces and the checker carry the mark, so it is applied
+consistently across the outputs examined.
+
+**Not robust to the ordinary thing a reader does with text.** The mark is metadata
+beside the prose. It travels with the page, the feed item and the response; it
+does not travel with the sentences when they are copied into a document, a message
+or another site, and the evidence file says so in the operator's own capture. No
+technique in general use marks plain text in a way that survives copying — there
+is no C2PA binding for HTML prose and no accepted text watermark — so this is the
+state of the art rather than a shortfall against it. That is why the verdict is
+PARTIAL and not FAIL, and why the qualified duty caps the severity at MINOR: the
+solution is as robust as the type of content allows, and the standard asks only
+for what is technically feasible.
+
+**What would move this to PASS.** A generally acknowledged technique for marking
+plain text that survives copying, adopted here when it exists — or a technical
+standard under 50(7) that settles metadata as sufficient for text. Until one of
+those, this is the honest grade for any text-only provider, and an auditor that
+scored a metadata mark on text as fully robust would be grading the format, not
+the outcome.
 
 ```finding
 id: F-03
 provision: EUAIA-50-2-QUALITY
-verdict: NOT_APPLICABLE
-severity: NONE
+verdict: PARTIAL
+severity: MINOR
 duty_force: qualified
 applicability: transitional
-provenance: inferred
+provenance: observed
 cite: reference/32024R1689/article-50.md:L16
 quote: Providers shall ensure their technical solutions are effective, interoperable, robust and reliable as far as this is technically feasible, taking into account the specificities and limitations of various types of content, the costs of implementation and the generally acknowledged state of the art, as may be reflected in relevant technical standards.
-basis: trigger_not_met
-evidence: examples/03_self-audit-vigilia/evidence-pack/system-facts.md:L23
-evidence_quote: **None found.** The dispatch carries `BlogPosting` structured data naming an Organization as author, which marks *authorship*, not *synthetic generation*.
-finding: No marking technique exists, so no technical solution's quality can be assessed; the underlying duty is scored once at F-02 and falls due on 2 December 2026.
+evidence: examples/03_self-audit-vigilia/evidence-pack/outputs/dispatch-structured-data-2026-09-09.md:L89-L89
+evidence_quote: The mark is metadata beside the text. It travels with the page, with the feed item and with the HTTP response; it does not travel with the prose if a reader copies the words out of the page.
+finding: The marking technique is interoperable and consistently applied — the IPTC digital-source-type vocabulary in JSON-LD, RSS and an HTTP header, with a plain synthetic-content flag beside it — but it is metadata on the container and does not survive the prose being copied out, which is the limit of what is technically feasible for plain text today; the duty reaches this artifact through Article 111(4) on 2 December 2026, and this is the grade it would carry on that date.
+remediation: Adopt a text-marking technique that survives copying if one becomes generally acknowledged, or a 50(7) standard that settles metadata as sufficient for text; until then keep the mark on every text-producing surface and re-test whenever one is added.
 ```
 
 ### F-04 · Article 50(3), first limb · NOT_APPLICABLE

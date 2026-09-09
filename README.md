@@ -353,8 +353,9 @@ the work, no tooling involved. Then three worked audits: a support chatbot
 ([01](examples/01_fixture-saas-chatbot/)), an image generator
 ([02](examples/02_fixture-image-generator/)), and a self-audit of a live commercial
 service ([03](examples/03_self-audit-vigilia/)) that returned a MAJOR and a MINOR
-against its own author's product, was acted on, and was re-run three days later
-with the MAJOR closed and the MINOR still open.
+against its own author's product, was acted on twice, and was re-run on 2026-09-06
+and 2026-09-09 with both closed — and a smaller MINOR opened by the second fix, on
+how far a mark on plain text can go.
 
 ---
 
