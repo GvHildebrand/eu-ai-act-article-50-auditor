@@ -96,7 +96,7 @@ was skipped, or a severity is not what the matrix produces. **A report that does
 not pass is not finished.**
 
 It does **not** check whether a verdict is legally right. Nothing can — see
-[what this does not guarantee](README.md#what-this-does-not-guarantee).
+[what this does not guarantee](docs/how-it-works.md#what-this-does-not-guarantee).
 
 ---
 

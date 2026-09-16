@@ -213,4 +213,4 @@ python3 _verify/verify_citations.py --all     # the reports quote it correctly
 
 Then try to break one — change a quote, drop a finding, downgrade a severity, cite
 the consolidated text instead of the Official Journal. The verifier names what you
-did. There is a transcript of exactly that in [`README.md`](README.md).
+did. There is a transcript of exactly that in [`docs/how-it-works.md`](docs/how-it-works.md).
