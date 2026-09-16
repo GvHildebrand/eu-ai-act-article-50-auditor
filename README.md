@@ -26,6 +26,9 @@ tell you whether a verdict is legally right.
 To see a finished audit first, read [example 01](examples/01_fixture-saas-chatbot/).
 `make verify` checks everything shipped in this repository. It works offline.
 
+The README is tested on strangers, not argued: [docs/stranger-tests.md](docs/stranger-tests.md)
+records every run and every place a newcomer got stuck.
+
 ## Where things are
 
 | | |
